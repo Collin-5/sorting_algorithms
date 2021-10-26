@@ -2,18 +2,18 @@
 /**
  * partition - partitions the array
  * @array: array to take in
- * @start: start of array;
- * @end: end of array
+ * @low: the low
+ * @high: the high
  * @size: full size of array
  * Return: pvt position
  */
-int partition(int *array, int lo, int hi, size_t size)
+int partition(int *array, int low, int high, size_t size)
 {
 	int i, j, pivot, tmp;
 
-	pivot = array[hi];
-	i = lo - 1;
-	for (j = lo; j < hi; j++)
+	pivot = array[high];
+	i = low - 1;
+	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
 		{
@@ -27,11 +27,11 @@ int partition(int *array, int lo, int hi, size_t size)
 			}
 		}
 	}
-	if (i + 1 != hi)
+	if (i + 1 != high)
 	{
 		tmp = array[i + 1];
-		array[i + 1] = array[hi];
-		array[hi] = tmp;
+		array[i + 1] = array[high];
+		array[high] = tmp;
 		print_array(array, size);
 	}
 
@@ -41,21 +41,20 @@ int partition(int *array, int lo, int hi, size_t size)
 /**
  * quicksort - implementation of the quick sort algorithm
  * @array: the array to sort
- * @lo: the lo
- * @hi: the high
+ * @low: the low
+ * @high: the high
  * @size: size of the array
- *
  * Return: void
  */
-void quicksort(int *array, int lo, int hi, size_t size)
+void quicksort(int *array, int low, int high, size_t size)
 {
 	int p;
 
-	if (lo < hi)
+	if (low < high)
 	{
-		p = partition(array, lo, hi, size);
-		quicksort(array, lo, p - 1, size);
-		quicksort(array, p + 1, hi, size);
+		p = partition(array, low, high, size);
+		quicksort(array, low, p - 1, size);
+		quicksort(array, p + 1, high, size);
 	}
 }
 
